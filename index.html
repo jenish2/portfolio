@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jenish Dholariya - Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS Library for Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background-color: #111827;
+      color: #e5e7eb;
+      transition: background-color 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+    .light {
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+    .light .bg-gray-800 {
+      background-color: #f3f4f6;
+    }
+    .light .bg-gray-700 {
+      background-color: #ffffff;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+    .navbar.scrolled {
+      background-color: rgba(17, 24, 39, 0.95);
+    }
+    .light .navbar.scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+    .nav-link.active {
+      color: #14b8a6;
+      border-bottom: 2px solid #14b8a6;
+    }
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn {
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    /* Keyword Carousel Animation */
+    .keyword-carousel {
+      position: relative;
+      min-height: 2.5rem;
+    }
+    .keyword-carousel span {
+      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) scale(1);
+      min-width: 150px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+    }
+    .keyword-carousel span.active {
+      display: inline-block;
+      animation: fadeScale 4s ease-in-out;
+      box-shadow: 0 0 8px rgba(20, 184, 166, 0.5);
+    }
+    @keyframes fadeScale {
+      0% { opacity: 0; transform: translateX(-50%) scale(1); }
+      25% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+      75% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+      100% { opacity: 0; transform: translateX(-50%) scale(1); }
+    }
+    /* Accordion for Skills */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-toggle:checked ~ .accordion-content {
+      max-height: 500px;
+    }
+    .accordion-label {
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .accordion-label:hover {
+      color: #14b8a6;
+    }
+    /* LinkedIn and GitHub Icons */
+    .linkedin-icon, .github-icon {
+      transition: fill 0.3s;
+    }
+    .linkedin-icon:hover, .github-icon:hover {
+      fill: #14b8a6;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      p, li {
+        font-size: 1rem;
+      }
+      .keyword-carousel span {
+        font-size: 1rem;
+        min-width: 120px;
+      }
+      .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .navbar .space-x-6 {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+  <!-- Navigation -->
+  <nav class="navbar bg-gray-900 shadow-lg light:bg-white">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-teal-400 light:text-teal-500">Jenish Dholariya</a>
+      <div class="space-x-6 flex items-center">
+        <a href="#home" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Home</a>
+        <a href="#about" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">About</a>
+        <a href="#skills" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Skills</a>
+        <a href="#experience" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Experience</a>
+        <a href="#projects" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Projects</a>
+        <a href="#education" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Education</a>
+        <a href="#contact" class="nav-link text-gray-300 hover:text-teal-400 light:text-gray-600 light:hover:text-teal-500">Contact</a>
+        <span class="theme-toggle cursor-pointer text-2xl" title="Toggle Theme">☀️</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-500 to-coral-500 text-white">
+    <div class="text-center px-6" data-aos="fade-up">
+      <h1 class="text-6xl md:text-7xl font-bold mb-4">Jenish Dholariya</h1>
+      <p class="text-3xl md:text-4xl mb-4">Software Engineer</p>
+      <p class="text-xl md:text-2xl mb-6 keyword-carousel">
+        <span>Python</span>
+        <span>Django</span>
+        <span>React</span>
+        <span>Scalable Solutions</span>
+      </p>
+      <div class="flex justify-center space-x-4 flex-wrap gap-4">
+        <a href="#contact" class="btn bg-white text-teal-600 px-6 py-3 rounded-full font-semibold hover:bg-teal-100" data-aos="fade-up" data-aos-delay="100">Get in Touch</a>
+        <a href="JenishDholariya_Resume.pdf" class="btn bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-600" data-aos="fade-up" data-aos-delay="200">Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">About Me</h2>
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-delay="100">
+      <p class="text-lg mb-6">
+        I'm a dedicated Software Engineer with over 3 years of experience building scalable web applications and data-driven solutions. Specializing in Python, Django, FastAPI, and React, I excel at delivering efficient, high-impact systems for healthcare, finance, and content platforms, with a focus on clean code and performance.
+      </p>
+      <div class="flex justify-center space-x-6">
+        <a href="https://linkedin.com/in/jenish-dholariya" target="_blank" class="text-teal-400 hover:text-teal-300 light:text-teal-500 light:hover:text-teal-700 font-semibold">LinkedIn</a>
+        <a href="https://github.com/jenish2" target="_blank" class="text-teal-400 hover:text-teal-300 light:text-teal-500 light:hover:text-teal-700 font-semibold">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-24 bg-gray-800 light:bg-gray-100">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Technical Skills</h2>
+      <div class="max-w-2xl mx-auto space-y-4">
+        <!-- Languages -->
+        <div class="bg-gray-700 light:bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="100">
+          <input type="checkbox" id="skills-languages" class="accordion-toggle hidden" checked>
+          <label for="skills-languages" class="accordion-label text-2xl font-semibold text-teal-400 light:text-teal-500 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm-2-5a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+            Languages
+          </label>
+          <div class="accordion-content">
+            <ul class="list-disc pl-8 mt-4 space-y-2">
+              <li>Python</li>
+              <li>Java</li>
+              <li>JavaScript</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Technologies -->
+        <div class="bg-gray-700 light:bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="200">
+          <input type="checkbox" id="skills-technologies" class="accordion-toggle hidden" checked>
+          <label for="skills-technologies" class="accordion-label text-2xl font-semibold text-teal-400 light:text-teal-500 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm-2-5a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+            Technologies
+          </label>
+          <div class="accordion-content">
+            <ul class="list-disc pl-8 mt-4 space-y-2">
+              <li>Django & Django REST Framework</li>
+              <li>FastAPI, Flask, Pytest</li>
+              <li>React, Pandas, Numpy</li>
+              <li>SQLAlchemy, WSGI, Nginx</li>
+              <li>Jenkins, AWS, Docker</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Databases & Tools -->
+        <div class="bg-gray-700 light:bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="300">
+          <input type="checkbox" id="skills-tools" class="accordion-toggle hidden" checked>
+          <label for="skills-tools" class="accordion-label text-2xl font-semibold text-teal-400 light:text-teal-500 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm-2-5a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+            Databases & Tools
+          </label>
+          <div class="accordion-content">
+            <ul class="list-disc pl-8 mt-4 space-y-2">
+              <li>MSSQL, MySQL, PostgreSQL, MongoDB</li>
+              <li>Git, BitBucket, GitHub</li>
+              <li>JIRA, VSCode, PyCharm</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-24 container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Experience</h2>
+    <div class="space-y-12 max-w-3xl mx-auto">
+      <!-- ELLKAY -->
+      <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">Software Engineer, ELLKAY</h3>
+        <p class="text-gray-400 light:text-gray-600">Jun 2023 ─ Present | Remote</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+          <li>Developed RESTful APIs using FastAPI for predictive healthcare analytics with ML models.</li>
+          <li>Architected a Django-based Rule Engine for EMPI, boosting patient matching by 30%.</li>
+          <li>Optimized SQL queries and stored procedures, improving data retrieval by 25%.</li>
+          <li>Enhanced application stability through Python debugging and test case resolution.</li>
+        </ul>
+      </div>
+      <!-- Crest Data Systems -->
+      <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">Software Engineer, Crest Data Systems</h3>
+        <p class="text-gray-400 light:text-gray-600">Dec 2021 ─ May 2023 | Ahmedabad, Gujarat</p>
+        <ul class="list-disc pl-6 mt-4 space-y-2">
+          <li>Built a timesheet automation system with Django REST and React, reducing manual tasks by 30%.</li>
+          <li>Automated Splunk/SignalFx testing with Pytest and Selenium, streamlining CI/CD pipelines.</li>
+          <li>Integrated third-party APIs to enhance application functionality.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-24 bg-gray-800 light:bg-gray-100">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Trading Bots -->
+        <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">Trading Bots</h3>
+          <p class="text-gray-400 light:text-gray-600">Python, Pandas, Ta-Lib, AWS</p>
+          <p class="mt-4">Developed algorithmic trading bots for cryptocurrency (Bybit) and Forex (IQOption), hosted on AWS for high-accuracy trade execution.</p>
+          <a href="https://github.com/jenish2/trading-bots" target="_blank" class="mt-4 inline-block" title="Trading Bots GitHub">
+            <svg class="w-5 h-5 github-icon fill-current text-gray-300 light:text-gray-600" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.419-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+        <!-- AI-Powered Content Platform -->
+        <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">AI-Powered Content Platform</h3>
+          <p class="text-gray-400 light:text-gray-600">Django REST Framework, OpenAI API</p>
+          <p class="mt-4">Created a RESTful API for generating customizable content (blogs, quizzes) using OpenAI GPT with dynamic prompt generation.</p>
+          <a href="https://github.com/jenish2/ai-content-platform" target="_blank" class="mt-4 inline-block" title="AI-Powered Content Platform GitHub">
+            <svg class="w-5 h-5 github-icon fill-current text-gray-300 light:text-gray-600" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.419-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+        <!-- Blogs Management System -->
+        <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">Blogs Management System</h3>
+          <p class="text-gray-400 light:text-gray-600">FastAPI, SQLite3</p>
+          <p class="mt-4">Built a secure blog platform with JWT authentication, enabling CRUD operations on posts.</p>
+          <a href="https://github.com/jenish2/blogs-management-system" target="_blank" class="mt-4 inline-block" title="Blogs Management System GitHub">
+            <svg class="w-5 h-5 github-icon fill-current text-gray-300 light:text-gray-600" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.419-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="py-24 container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Education</h2>
+    <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="text-2xl font-semibold text-teal-400 light:text-teal-500">Bachelor of Technology in Computer Engineering</h3>
+      <p class="text-gray-400 light:text-gray-600">Dharmsinh Desai University, Nadiad, Gujarat | 2018 ─ 2022</p>
+      <p class="mt-4">GPA: 8.2 / 10.0</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-24 bg-gray-800 light:bg-gray-100">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Testimonials</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="100">
+          <p class="italic">"Jenish's ability to deliver scalable solutions under tight deadlines is remarkable."</p>
+          <p class="mt-4 font-semibold text-teal-400 light:text-teal-500 flex items-center gap-2">
+            ─ Om Talsania, Chief Solutions Architect, ELLKAY
+            <a href="https://linkedin.com/in/omtalsania" target="_blank" title="Om Talsania's LinkedIn">
+              <svg class="w-5 h-5 linkedin-icon fill-current text-gray-300 light:text-gray-600" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.03-3.06-1.866-3.06-1.867 0-2.152 1.458-2.152 2.966v5.698h-3v-11h2.879v1.509h.04c.401-.758 1.379-1.557 2.834-1.557 3.03 0 3.586 1.992 3.586 4.579v6.469z"/>
+              </svg>
+            </a>
+          </p>
+        </div>
+        <div class="bg-gray-700 light:bg-white p-8 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="200">
+          <p class="italic">"His expertise in Python and React streamlined our development process significantly."</p>
+          <p class="mt-4 font-semibold text-teal-400 light:text-teal-500">─ Team Lead, Crest Data Systems</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Get in Touch</h2>
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-lg mb-8" data-aos="fade-up" data-aos-delay="100">
+        I'm eager to collaborate on innovative projects and explore new opportunities. Reach out via email, phone, or LinkedIn!
+      </p>
+      <div class="flex justify-center space-x-6 flex-wrap gap-4">
+        <a href="mailto:jenish.soft.dev@gmail.com" class="btn bg-teal-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600" data-aos="fade-up" data-aos-delay="200">Email Me</a>
+        <a href="tel:+919081826363" class="btn bg-teal-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600" data-aos="fade-up" data-aos-delay="300">+91 90818 26363</a>
+        <a href="https://linkedin.com/in/jenish-dholariya" target="_blank" class="btn bg-teal-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600" data-aos="fade-up" data-aos-delay="400">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 light:bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 Jenish Dholariya. Built with 💻 and ☕.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Initialize AOS
+    AOS.init({ duration: 800, once: true });
+
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeToggle.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Load Default Dark Theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light');
+      themeToggle.textContent = '🌙';
+    } else {
+      document.body.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+      themeToggle.textContent = '☀️';
+    }
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Navbar Scroll Effect and Active Link
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      // Highlight active section
+      let current = '';
+      const sections = document.querySelectorAll('section[id]');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Keyword Carousel Animation
+    const keywords = document.querySelectorAll('.keyword-carousel span');
+    let currentIndex = 0;
+
+    function rotateKeywords() {
+      keywords.forEach((keyword, index) => {
+        keyword.classList.remove('active');
+        if (index === currentIndex) {
+          keyword.classList.add('active');
+        }
+      });
+      currentIndex = (currentIndex + 1) % keywords.length;
+    }
+
+    rotateKeywords();
+    setInterval(rotateKeywords, 4000);
+  </script>
+</body>
+</html>
